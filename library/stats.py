@@ -754,15 +754,24 @@ class Date:
         if not lc_time:
             lc_time = "en_US"
 
-        date_theme_data = config.THEME_DATA['STATS']['DATE']
-        day_theme_data = date_theme_data['DAY']['TEXT']
-        date_format = day_theme_data.get("FORMAT", 'medium')
+        date_theme_config_data = config.THEME_DATA['STATS']['DATE']
+
+        date_theme_data = date_theme_config_data['DATE']['TEXT']
+
+        date_format = date_theme_data.get("FORMAT", 'medium')
         display_themed_value(
-            theme_data=day_theme_data,
+            theme_data=date_theme_data,
             value=f"{babel.dates.format_date(date_now, format=date_format, locale=lc_time)}"
         )
 
-        hour_theme_data = date_theme_data['HOUR']['TEXT']
+        day_theme_data = date_theme_config_data['DAY']['TEXT']
+        day_format = day_theme_data.get("FORMAT", 'medium')
+        display_themed_value(
+            theme_data=day_theme_data,
+            value=f"{babel.dates.format_date(date_now, format=day_format, locale=lc_time)}"
+        )
+
+        hour_theme_data = date_theme_config_data['HOUR']['TEXT']
         time_format = hour_theme_data.get("FORMAT", 'medium')
         display_themed_value(
             theme_data=hour_theme_data,
